@@ -1,7 +1,12 @@
+import React from "react";
+import { useState } from "react";
+import { data } from "./data.js";
+import Header from "./component/Header.js";
 function App() {
+  const [products] = useState(data);
   return (
     <>
-      <h1>siema22</h1>
+      <Header />
     </>
   );
 }
