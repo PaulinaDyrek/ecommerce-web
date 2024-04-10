@@ -8,7 +8,7 @@ export default function Header() {
       <header className="flex items-center justify-between p-8 border-b border-slate-400 max-w-7xl mx-auto">
         <div className="flex items-center justify-start gap-4">
           <img src={logo} alt="" />
-          <nav>
+          <nav className="hidden">
             <ul className="flex items-center justify-start gap-4">
               <li>Collections</li>
               <li>Men</li>
@@ -19,10 +19,10 @@ export default function Header() {
           </nav>
         </div>
         <div>
-          <ul className="flex items-center justify-start gap-4">
+          <ul className="flex items-center justify-start gap-4 text-slate-600">
             <li>
               <button>
-                <TiShoppingCart />
+                <TiShoppingCart className="text-2xl" />
               </button>
             </li>
             <li>

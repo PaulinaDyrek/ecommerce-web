@@ -4,19 +4,66 @@ import { useState } from "react";
 import minus from "../images/icon-minus.svg";
 import plus from "../images/icon-plus.svg";
 import { TiShoppingCart } from "react-icons/ti";
+import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 
 export default function MainSection() {
   const [products] = useState(data);
   const [value, setValue] = useState(0);
   const { mainImage } = products[value];
   const [amount, setAmount] = useState(0);
+  const [slideIndex, setSlideIndex] = useState(1);
+  const handleMinus = () => {
+    setAmount(amount - 1);
+    if (amount <= 0) {
+      setAmount(0);
+    }
+  };
+  const nextSlide = () => {
+    if (slideIndex !== products.lenght) {
+      setSlideIndex(slideIndex + 1);
+    } else if (slideIndex === products.lenght) {
+      setSlideIndex(0);
+    }
+  };
+  const previousSlide = () => {
+    if (slideIndex !== 1) {
+      setSlideIndex(slideIndex - 1);
+    } else if (slideIndex === 1) {
+      setSlideIndex(products.length);
+    }
+  };
 
   return (
-    <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 mt-10">
+    <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:mt-10">
       <article>
-        <img src={mainImage} alt="" className="w-full rounded-2xl" />
+        <div>
+          {products.map((item, index) => (
+            <div
+              key={index}
+              className={slideIndex === index + 1 ? "relative" : "hidden"}
+            >
+              <img
+                src={item.mainImage}
+                alt=""
+                className="w-full lg:rounded-2xl"
+              />
+              <ul>
+                <li onClick={previousSlide}>
+                  <button className="bg-white rounded-full p-5 shadow absolute top left-4 top-1/2 -translate-y-1/2">
+                    <FaChevronLeft />
+                  </button>
+                </li>
+                <li onClick={nextSlide}>
+                  <button className="bg-white rounded-full p-5 shadow absolute top right-4 top-1/2 -translate-y-1/2">
+                    <FaChevronRight />
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ))}
+        </div>
         <ul
-          className="flex items-center justify-start gap-5 flex-wrap mt-5"
+          className="hidden lg:flex items-center justify-start gap-5 flex-wrap mt-5"
           key={data.id}
         >
           {products.map((data, index) => (
@@ -56,11 +103,14 @@ export default function MainSection() {
         </div>
         <div className="mt-10">
           <ul className="flex items-center justify-between bg-slate-100 py-2 px-4 rounded shadow">
-            <li onClick={() => setAmount(amount - 1)}>
+            <li onClick={handleMinus} className="cursor-pointer">
               <img src={minus} alt="" />
             </li>
             <li>{amount}</li>
-            <li onClick={() => setAmount(amount + 1)}>
+            <li
+              onClick={() => setAmount(amount + 1)}
+              className="cursor-pointer"
+            >
               <img src={plus} alt="" />
             </li>
           </ul>
