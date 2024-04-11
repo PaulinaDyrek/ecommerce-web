@@ -2,10 +2,11 @@ import React from "react";
 import logo from "../images/logo.svg";
 import avatar from "../images/image-avatar.png";
 import { TiShoppingCart } from "react-icons/ti";
+import Lightbox from "./Lightbox.js";
 export default function Header() {
   return (
     <>
-      <header className="flex items-center justify-between p-8 border-b border-slate-400 max-w-7xl mx-auto">
+      <header className="flex items-center justify-between p-5 border-b border-slate-400 max-w-7xl mx-auto">
         <div className="flex items-center justify-start gap-4">
           <img src={logo} alt="" />
           <nav className="hidden">

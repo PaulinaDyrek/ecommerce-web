@@ -19,10 +19,10 @@ export default function MainSection() {
     }
   };
   const nextSlide = () => {
-    if (slideIndex !== products.lenght) {
+    if (slideIndex !== products.length) {
       setSlideIndex(slideIndex + 1);
-    } else if (slideIndex === products.lenght) {
-      setSlideIndex(0);
+    } else if (slideIndex === products.length) {
+      setSlideIndex(1);
     }
   };
   const previousSlide = () => {
@@ -34,27 +34,29 @@ export default function MainSection() {
   };
 
   return (
-    <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:mt-10">
+    <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:place-items-center lg:py-5">
       <article>
-        <div>
+        <div className="lg:w-3/4">
           {products.map((item, index) => (
             <div
               key={index}
               className={slideIndex === index + 1 ? "relative" : "hidden"}
             >
-              <img
-                src={item.mainImage}
-                alt=""
-                className="w-full lg:rounded-2xl"
-              />
-              <ul>
-                <li onClick={previousSlide}>
-                  <button className="bg-white rounded-full p-5 shadow absolute top left-4 top-1/2 -translate-y-1/2">
+              <img src={mainImage} alt="" className="w-full lg:rounded-2xl" />
+              <ul className="lg:hidden">
+                <li>
+                  <button
+                    onClick={previousSlide}
+                    className="bg-white rounded-full p-5 shadow absolute top left-4 top-1/2 -translate-y-1/2"
+                  >
                     <FaChevronLeft />
                   </button>
                 </li>
-                <li onClick={nextSlide}>
-                  <button className="bg-white rounded-full p-5 shadow absolute top right-4 top-1/2 -translate-y-1/2">
+                <li>
+                  <button
+                    onClick={nextSlide}
+                    className="bg-white rounded-full p-5 shadow absolute top right-4 top-1/2 -translate-y-1/2"
+                  >
                     <FaChevronRight />
                   </button>
                 </li>
@@ -68,12 +70,12 @@ export default function MainSection() {
         >
           {products.map((data, index) => (
             <li
-              onClick={() => setValue(index)}
+              onClick={(data) => setValue(index)}
               className={`${
                 index === value && "border-2 border-orange-400 opacity-80"
               } border-2 rounded-2xl overflow-hidden cursor-pointer`}
             >
-              <img src={data.thumbnail} alt="" className="w-20" />
+              <img src={data.thumbnail} alt="" className="w-20 lg:w-14" />
             </li>
           ))}
         </ul>
@@ -90,7 +92,7 @@ export default function MainSection() {
           Featuringa durable rubber outer sole, they'llwithstand everything the
           weather can offer.
         </p>
-        <div className="flex flex-wrap items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between lg:flex-col lg:items-start lg:gap-2">
           <ul className="flex items-center gap-5">
             <li className="text-slate-900 font-bold text-2xl">$125.00</li>
             <li className="bg-orange-100 py-1 px-2 text-orange-400 tracking-wide text-sm font-bold inline-block rounded shadow ">
@@ -101,8 +103,8 @@ export default function MainSection() {
             <s>$250.00</s>
           </p>
         </div>
-        <div className="mt-10">
-          <ul className="flex items-center justify-between bg-slate-100 py-2 px-4 rounded shadow">
+        <div className="mt-10 lg:flex items-center justify-between gap-2">
+          <ul className="flex items-center justify-between bg-slate-100 py-2 px-4 rounded shadow lg:flex-1">
             <li onClick={handleMinus} className="cursor-pointer">
               <img src={minus} alt="" />
             </li>
@@ -114,9 +116,11 @@ export default function MainSection() {
               <img src={plus} alt="" />
             </li>
           </ul>
-          <button className="flex items-center justify-center gap-4 bg-orange-500 py-2 px-4 text-white font-bold rounded-lg shadow mt-5 w-full">
-            <TiShoppingCart /> Add to cart
-          </button>
+          <div className="lg:flex-1">
+            <button className="flex items-center justify-center gap-4 bg-orange-500 py-2 px-4 text-white font-bold rounded-lg shadow mt-5 w-full lg:mt-0  hover:bg-orange-600 transition-all duration-200">
+              <TiShoppingCart /> Add to cart
+            </button>
+          </div>
         </div>
       </article>
     </section>
