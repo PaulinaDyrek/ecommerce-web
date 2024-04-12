@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Header />
-      {/* <Lightbox></Lightbox> */}
+      <Lightbox products={products} />
       <MainSection />
     </>
   );
