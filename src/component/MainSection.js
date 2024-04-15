@@ -42,7 +42,11 @@ export default function MainSection() {
               key={index}
               className={slideIndex === index + 1 ? "relative" : "hidden"}
             >
-              <img src={mainImage} alt="" className="w-full lg:rounded-2xl" />
+              <img
+                src={item.mainImage}
+                alt=""
+                className="w-full lg:rounded-2xl"
+              />
               <ul className="lg:hidden">
                 <li>
                   <button
@@ -64,18 +68,16 @@ export default function MainSection() {
             </div>
           ))}
         </div>
-        <ul
-          className="hidden lg:flex items-center justify-start gap-5 flex-wrap mt-5"
-          key={data.id}
-        >
-          {products.map((data, index) => (
+        <ul className="hidden lg:flex items-center justify-start gap-5 flex-wrap mt-5">
+          {products.map((item, index) => (
             <li
-              onClick={(data) => setValue(index)}
+              key={item.id}
+              onClick={() => setValue(index)}
               className={`${
                 index === value && "border-2 border-orange-400 opacity-80"
               } border-2 rounded-2xl overflow-hidden cursor-pointer`}
             >
-              <img src={data.thumbnail} alt="" className="w-20 lg:w-14" />
+              <img src={item.thumbnail} alt="" className="w-20 lg:w-14" />
             </li>
           ))}
         </ul>
@@ -126,10 +128,3 @@ export default function MainSection() {
     </section>
   );
 }
-
-// $125.00
-// 50%
-// $250.00
-
-// 0
-// Add to cart
