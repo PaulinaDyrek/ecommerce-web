@@ -5,56 +5,16 @@ import minus from "../images/icon-minus.svg";
 import plus from "../images/icon-plus.svg";
 import { TiShoppingCart } from "react-icons/ti";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import Lightbox from "./Lightbox.js";
 
-function Lightbox({ products, slideIndex, nextSlide, previousSlide }) {
-  return (
-    <>
-      <article className="bg-black bg-opacity-75 fixed top-0 right-0 bottom-0 left-0 z-50">
-        <div className="flex items-center justify-center h-screen">
-          {products.map((item, index) => (
-            <div
-              key={index}
-              className={slideIndex === index + 1 ? "relative" : "hidden"}
-            >
-              <img
-                src={item.mainImage}
-                alt=""
-                className="lg:h-screen lg:rounded-2xl"
-                style={{
-                  height: "600px",
-                }}
-              />
-              <ul>
-                <li>
-                  <button
-                    onClick={previousSlide}
-                    className="bg-white rounded-full p-5 shadow absolute top left-4 top-1/2 -translate-y-1/2"
-                  >
-                    <FaChevronLeft />
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={nextSlide}
-                    className="bg-white rounded-full p-5 shadow absolute top right-4 top-1/2 -translate-y-1/2"
-                  >
-                    <FaChevronRight />
-                  </button>
-                </li>
-              </ul>
-            </div>
-          ))}
-        </div>
-      </article>
-    </>
-  );
-}
 export default function MainSection() {
   const [products] = useState(data);
   const [value, setValue] = useState(0);
-  const { mainImage } = products[value];
   const [amount, setAmount] = useState(0);
   const [slideIndex, setSlideIndex] = useState(1);
+  const [showLightbox, setShowLightbox] = useState(false);
+  const { mainImage } = products[value];
+
   const handleMinus = () => {
     setAmount(amount - 1);
     if (amount <= 0) {
@@ -78,15 +38,19 @@ export default function MainSection() {
 
   return (
     <>
-      <Lightbox
-        products={products}
-        slideIndex={slideIndex}
-        nextSlide={nextSlide}
-        previousSlide={previousSlide}
-      />
+      {showLightbox && (
+        <Lightbox
+          products={products}
+          slideIndex={slideIndex}
+          nextSlide={nextSlide}
+          previousSlide={previousSlide}
+          setShowLightbox={setShowLightbox}
+        />
+      )}
+
       <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:place-items-center lg:py-5">
         <article>
-          <div className="lg:w-3/4">
+          <div className="lg:w-3/4 lg:hidden">
             {products.map((item, index) => (
               <div
                 key={index}
@@ -95,7 +59,8 @@ export default function MainSection() {
                 <img
                   src={item.mainImage}
                   alt=""
-                  className="w-full lg:rounded-2xl"
+                  className="w-full lg:rounded-2xl cursor-pointer"
+                  onClick={() => setShowLightbox(true)}
                 />
                 <ul className="lg:hidden">
                   <li>
@@ -117,6 +82,14 @@ export default function MainSection() {
                 </ul>
               </div>
             ))}
+          </div>
+          <div className="hidden lg:block lg:w-3/4">
+            <img
+              src={mainImage}
+              alt=""
+              className="w-full lg:rounded-2xl cursor-pointer"
+              onClick={() => setShowLightbox(true)}
+            />
           </div>
           <ul className="hidden lg:flex items-center justify-start gap-5 flex-wrap mt-5">
             {products.map((item, index) => (
