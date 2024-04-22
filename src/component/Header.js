@@ -8,6 +8,7 @@ import { TiShoppingCart } from "react-icons/ti";
 import Cart from "./Cart.js";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [cartIsOpen, setCartIsOpen] = useState(false);
 
   return (
     <>
@@ -41,13 +42,11 @@ export default function Header() {
         <div>
           <ul className="flex items-center justify-start gap-4 text-slate-600">
             <li>
-              <button>
+              <button onClick={() => setCartIsOpen(!cartIsOpen)}>
                 <TiShoppingCart className="text-2xl" />
               </button>
             </li>
-            <li>
-              <Cart />
-            </li>
+            <li>{cartIsOpen && <Cart />}</li>
             <li>
               <img src={avatar} alt="" className="w-12" />
             </li>

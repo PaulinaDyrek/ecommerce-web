@@ -6,7 +6,7 @@ export default function Cart() {
   return (
     <>
       <article
-        className="bg-white rounded-2xl shadow-2xl p-8 absolute right-8 top-24 left-8"
+        className="bg-white rounded-2xl shadow-2xl p-8 absolute right-8 top-24 left-8 lg:w-96 lg:left-auto "
         style={{
           zIndex: "1000",
         }}
@@ -15,9 +15,12 @@ export default function Cart() {
         <div className="flex items-center justify-between">
           <img src={thumbnail} alt="" className="rounded-lg w-14" />
           <ul>
-            <li>{text}</li>
-            <li>
-              $125.00 x 3 <span>$375.00</span>
+            <li className="text-slate-600 text-sm">{`${text.substring(
+              0,
+              20
+            )}...`}</li>
+            <li className="text-slate-600 text-sm">
+              $125.00 x 3 <span className="font-bold">$375.00</span>
             </li>
           </ul>
           <button>
